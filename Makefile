@@ -17,7 +17,7 @@ clean:
 	rm -rf ./build
 
 %_build:
-	go build -ldflags="-s -w" -o ./build/$(GOOS)/$(GOARCH)/$(NAME)$(EXT)
+	env GOOS=$(GOOS) GOARCH=$(GOARCH) go build -ldflags="-s -w" -o ./build/$(GOOS)/$(GOARCH)/$(NAME)$(EXT)
 
 %_package: %_build
 	@cd ./build/$(GOOS)/$(GOARCH) && tar -czf ./$(NAME)-$(GOOS)-$(GOARCH)-$(VERSION).tar.gz ./$(NAME)$(EXT)
